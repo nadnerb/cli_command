@@ -3,6 +3,7 @@ package command
 import (
 	"fmt"
 	"os"
+
 	"github.com/fatih/color"
 )
 
@@ -14,15 +15,17 @@ type Writer interface {
 
 type DefaultWriter struct {}
 
-var cyan = color.New(color.FgCyan).SprintFunc()
-var red = color.New(color.FgRed).SprintFunc()
-var yellow = color.New(color.FgYellow).SprintFunc()
+var Cyan = color.New(color.FgCyan).SprintFunc()
+var Red = color.New(color.FgRed).SprintFunc()
+var Yellow = color.New(color.FgYellow).SprintFunc()
+var Green = color.New(color.FgGreen).SprintFunc()
+var Bold = color.New(color.FgWhite, color.Bold).SprintFunc()
 
 func (d DefaultWriter) Error(errorMessage string, error error) {
 	fmt.Println()
 	fmt.Println("---------------------------------------------")
 	fmt.Fprintf(os.Stderr, "ERROR\n")
-	fmt.Fprintf(os.Stderr, "%s: %s\n", cyan(errorMessage), red(error))
+	fmt.Fprintf(os.Stderr, "%s: %s\n", Cyan(errorMessage), Red(error))
 	fmt.Println("---------------------------------------------")
 	fmt.Println()
 	os.Exit(1)
@@ -30,7 +33,7 @@ func (d DefaultWriter) Error(errorMessage string, error error) {
 
 func (d DefaultWriter) Warn(errorMessage string, error error) {
 	fmt.Fprintf(os.Stderr, "WARNING\n")
-	fmt.Fprintf(os.Stderr, "%s: %s\n", cyan(errorMessage), yellow(error))
+	fmt.Fprintf(os.Stderr, "%s: %s\n", Cyan(errorMessage), Yellow(error))
 	fmt.Println()
 }
 

@@ -8,10 +8,13 @@ import (
 )
 
 // does this work on windows?
-func InputAffirmative() bool {
-	fmt.Print("Are you sure? (yes)\n")
+func InputAreYouSure() bool {
+	return InputAffirmative("Are you sure?")
+}
+
+func InputAffirmative(message string) bool {
+	fmt.Printf("%s (yes)\n", Cyan(message))
 	reader := bufio.NewReader(os.Stdin)
 	text, _ := reader.ReadString('\n')
 	return strings.TrimSpace(text) == "yes"
 }
-
